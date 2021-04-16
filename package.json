@@ -1,0 +1,27 @@
+{
+  "name": "multi-task-manager",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <a href=\"http://nestjs.com/\" target=\"blank\"><img src=\"https://nestjs.com/img/logo_text.svg\" width=\"320\" alt=\"Nest Logo\" /></a> </p>",
+  "main": ".eslintrc.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keuller/multi-task-manager.git"
+  },
+  "keywords": [],
+  "author": "Keuller Magalhaes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keuller/multi-task-manager/issues"
+  },
+  "homepage": "https://github.com/keuller/multi-task-manager#readme",
+  "dependencies": {
+    "fastify": "^3.14.2",
+    "uuid": "^8.3.2"
+  }
+}
