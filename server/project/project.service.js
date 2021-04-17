@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { ok } from '../common/message.js';
 
 export default class ProjectService {
 
@@ -8,14 +9,17 @@ export default class ProjectService {
 
     addProject(userId, title) {
         const id = v4();
-        const project = { id, userId, title };
-        return this.repo.create(project)
-            .then(res => ({ status: 'OK', message: 'Project was created.' }));
+        return this.repo.create({ id, userId, title })
+            .then(_res => ok('Project was created.', { projectId: id }));
     }
 
     updateTitle(id, title) {
         return this.repo.updateTitle(id, title)
-            .then(res => ({ status: 'OK', message: 'Project was updated.' }));
+            .then(_res => ok('Project was updated.'));
+    }
+
+    getProject(id) {
+        return this.repo.findById(id);
     }
 
     getProjectsByUser(userId) {
@@ -29,6 +33,6 @@ export default class ProjectService {
 
     remove(id) {
         return this.repo.remove(id)
-            .then(res => ({ status: 'OK', message: 'Project was removed.' }));
+            .then(res => ok('Project was removed.'));
     }
 }

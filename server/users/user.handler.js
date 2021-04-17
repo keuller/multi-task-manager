@@ -1,10 +1,9 @@
-import userRepo from './user.repo.js';
-import UserService from './user.service.js';
+import { getUserService } from '../common/factory.js';
 
 /*
  * Register all route handlers for User resource
 */
-const userService = new UserService(userRepo);
+const userService = getUserService();
 
 export function registerUserRoutes(app) {
     app.post('/auth', auth);
@@ -15,14 +14,14 @@ export function registerUserRoutes(app) {
 /*
  * Authtentication user handler
 */
-async function auth(request, reply) {
+async function auth(request, _reply) {
     return await userService.auth(request.body);
 }
 
-async function registerUser(request, reply) {
+async function registerUser(request, _reply) {
     return await userService.register(request.body);
 }
 
-async function listUsers(request, reply) {
+async function listUsers(_request, _reply) {
     return await userService.getAll();
 }

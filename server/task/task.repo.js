@@ -11,13 +11,22 @@ export default {
         });
     },
 
+    update(task) {
+        return new Promise((resolve, reject) => {
+            let subtasks = tasks[task.projectId] || [];
+            let idx = subtasks.findIndex(item => item.id == task.id);
+            if (idx == -1) return reject({ status: 'NOT_FOUND' });
+            subtasks[idx].description = task.description;
+            tasks[task.projectId] = [...subtasks];
+            resolve({ status: 'OK' });
+        });
+    },
+
     finish(projectId, taskId) {
         return new Promise((resolve, reject) => {
             let subtasks = tasks[projectId] || [];
             let idx = subtasks.findIndex(item => item.id == taskId);
-            if (idx == -1) {
-                return reject({ status: 'NOT_FOUND' })
-            }
+            if (idx == -1) return reject({ status: 'NOT_FOUND' });
             subtasks[idx].finishedAt = new Date();
             tasks[projectId] = [...subtasks];
             resolve({ status: 'OK' });
@@ -42,7 +51,8 @@ export default {
             if (idx == -1) {
                 return reject({ status: 'NOT_FOUND' })
             }
-            tasks[projectId] = subtasks.splice(idx)
+            subtasks.splice(idx, 1);
+            tasks[projectId] = [...subtasks];
             resolve({ status: 'OK' })
         });
     },

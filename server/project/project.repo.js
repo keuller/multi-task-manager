@@ -6,7 +6,7 @@ let projects = [
 export default {
 
     create(project) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, _reject) => {
             projects = [...projects, project];
             resolve({ status: 'OK' })
         });
@@ -29,8 +29,19 @@ export default {
             if (idx == -1) {
                 return reject({ status: 'NOT_FOUND' })
             }
-            projects = projects.splice(idx)
+            projects.splice(idx, 1);
+            projects = [...projects];
             resolve({ status: 'OK' })
+        });
+    },
+
+    findById(id) {
+        return new Promise((resolve, reject) => {
+            let idx = projects.findIndex(item => item.id == id);
+            if (idx == -1) {
+                return reject({ status: 'NOT_FOUND' })
+            }
+            resolve(projects[idx]);
         });
     },
 
