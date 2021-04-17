@@ -1,10 +1,14 @@
 import { fastify } from 'fastify';
-import { liveness } from './app/health.handler.js';
+import { liveness, checkTokenHook } from './app/app.handler.js';
 import { registerUserRoutes } from './users/user.handler.js';
 import { registerProjectRoutes } from './project/project.handler.js';
 import { registerTaskRoutes } from './task/task.handler.js';
 
 const app = fastify({ logger: false })
+
+// this hook checks auth token for non public endpoints
+app.addHook('preHandler', checkTokenHook);
+
 app.get('/', async (request, reply) => {
     return { message: 'Hello guys!' }
 });

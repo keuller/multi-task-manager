@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { encode } from '../common/base64.js';
 
 export default class UserService {
 
@@ -23,8 +24,7 @@ export default class UserService {
     async auth(credentials) {
         try {
             let model = await this.repo.findByEmail(credentials.email);
-            let token = Buffer.from(JSON.stringify({ name: model.name, id: model.id, email: model.email }))
-                .toString('base64');
+            let token = encode({ name: model.name, id: model.id, email: model.email });
 
             if (model.password === credentials.password) {
                 return Promise.resolve({ status: 'OK', token });
