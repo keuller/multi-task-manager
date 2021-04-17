@@ -18,6 +18,7 @@ export default {
 
     create(user) {
         users = [...users, user];
+        return Promise.resolve({ status: 'OK' });
     },
 
     findAll() {
