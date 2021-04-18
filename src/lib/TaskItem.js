@@ -37,7 +37,7 @@ export default function TaskItem({ task, delAction, finishAction }) {
     }
 
     const clsName = (isFinished ? 'flex-grow bg-white p-2 rounded-r mt-1 border-b border-grey' : 
-        'flex-grow bg-white p-2 rounded-r mt-1 border-b border-grey cursor-pointer hover:bg-grey-lighter');
+        'flex-grow bg-white p-2 rounded-r mt-1 border-b border-grey cursor-pointer hover:bg-gray-100');
 
     return (
         <div className="flex  flex-row">
