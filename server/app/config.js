@@ -1,13 +1,23 @@
 import { decode } from '../common/base64.js';
+import Static from 'fastify-static';
+import Cors from 'fastify-cors';
 
-export function configApp(app) {
+export function configApp(app, publicPath) {
     // this hook checks auth token for non public endpoints
     app.addHook('preHandler', checkTokenHook);
     app.setErrorHandler(errorHandler);
 
     app.get('/health/liveness', liveness);
-    app.get('/', async (request, reply) => {
-        return { message: 'Hello guys!' }
+    
+    app.register(Cors, { 
+        origin: '*', 
+        allowedHeaders: ['Content-Type', 'authorization', 'Content-Length']
+    });
+
+    app.register(Static, {
+        root: publicPath,
+        prefix: '/',
+        prefixAvoidTrailingSlash: true,
     });
     
     return app;
@@ -19,10 +29,10 @@ async function liveness(request, reply) {
 
 // checkTokenHook is responsible for verify is endpoint is public or not
 function checkTokenHook(request, reply, done) {
-    const idx = ['/', '/auth', '/register'].findIndex(path => path == request.routerPath);
-    const isPublic = (idx > -1);
-
-    if (isPublic) return done();
+    const uri = request.routerPath || '';
+    const isProtected = uri.startsWith('/v1');
+    
+    if (!isProtected) return done();
 
     const hasToken = request.headers['authorization'];
     if (!hasToken) {
