@@ -21,6 +21,7 @@ export default function TaskItem({ task, delAction, finishAction }) {
     }
 
     const editClick = () => {
+        if (isFinished) return;
         taskAlert(description).then(res => {
             if (res != '') {
                 updateTask(task.project, task.id, res).then(result => setDescription(res));
