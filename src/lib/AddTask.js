@@ -5,8 +5,10 @@ export default function AddTask({ addAction }) {
 
     const addClick = (ev) => {
         ev.preventDefault();
-        addAction(description);
-        setDescription('');
+        if (description !== '') {
+            addAction(description);
+            setDescription('');
+        }
     };
 
     const pressEnter = (ev) => {
