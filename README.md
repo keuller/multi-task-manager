@@ -44,7 +44,7 @@ $ npm run test
 
 ## Access the application
 
-There two users you can use to access the application:
+There are two users that you can use to access the application:
 
 | Email | Password |
 |-------|----------|
