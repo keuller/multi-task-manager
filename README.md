@@ -48,3 +48,17 @@ There two users you can use to access the application:
 |-------|----------|
 | johndoe@gmail.com   | 12345 |
 | alice.smith@aol.com | 12345 |
+
+## Screens
+
+### Login 
+
+![login](https://github.com/keuller/multi-task-manager/blob/main/docs/multi-task-login.png?raw=true)
+
+### User Register
+
+![login](https://github.com/keuller/multi-task-manager/blob/main/docs/multi-task-register.png?raw=true)
+
+### Projects Panel
+
+![login](https://github.com/keuller/multi-task-manager/blob/main/docs/multi-task-projects.png?raw=true)
