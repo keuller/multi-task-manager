@@ -2,9 +2,11 @@
 
 Simple webapp that demonstrantes multi project management.
 
-## Description
+## Framework & Libs
 
-[Fastify](https://www.fastify.io/) framework.
+* [Fastify](https://www.fastify.io/) framework to create API backend.
+* [ReactJS](https://reactjs.org/) to create all the UI components.
+* [Jotai](https://github.com/pmndrs/jotai) to global state management.
 
 ## Installation
 
