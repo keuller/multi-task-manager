@@ -1,10 +1,7 @@
-import React, { useEffect, Suspense } from 'react';
-import { atom, useAtom } from 'jotai';
+import React, { useEffect, useState } from 'react';
 import { fetchProjects } from '../api/project';
 import TopNavBar from '../lib/TopNavBar';
 import ProjectCard from '../lib/ProjectCard';
-
-const projectsAtom = atom([]);
 
 function Cards({ projects, deleteProject }) {
     if (projects.length == 0) {
@@ -28,8 +25,7 @@ function Cards({ projects, deleteProject }) {
 }
 
 export default function Home() {
-    const Loading = () => (<div className="w-full pt-24 text-lg text-gray-500 font-semibold text-center"> Loading... </div>)
-    const [projects, setProjects] = useAtom(projectsAtom);
+    const [projects, setProjects] = useState([]);
 
     useEffect(async () => {
         setProjects(await fetchProjects());
@@ -48,9 +44,7 @@ export default function Home() {
         <div>
             <TopNavBar addProject={addProject} />
 
-            <Suspense fallback={<Loading />}>
-                <Cards projects={projects} deleteProject={delProject} />
-            </Suspense>
+            <Cards projects={projects} deleteProject={delProject} />
         </div>
     )
 }

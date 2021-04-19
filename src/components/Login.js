@@ -6,8 +6,6 @@ export default function Login({ doRegister, doAuth }) {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
-    useEffect(() => {}, [message]);
-
     const logIn = async (ev) => {
         ev.preventDefault();
         const ret = await authenticate(email, password);
