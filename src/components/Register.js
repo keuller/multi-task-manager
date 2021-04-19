@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useAtom } from 'jotai';
 import { registerUser } from '../api/user';
 import { Alert } from '../util/talert';
+import { viewAtom } from '../shared/views';
 
-export default function Register({ doLogin }) {
+export default function Register() {
+    const [, setView] = useAtom(viewAtom);
     const [errorMsg, setErrorMsg] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -21,13 +24,13 @@ export default function Register({ doLogin }) {
                 setErrorMsg(res);
                 return;
             }
-            doLogin();
+            loginClick(ev);
         })
     }
 
     const loginClick = (ev) => {
         ev.preventDefault();
-        doLogin();
+        setView('login');
     }
 
     const showMessage = () => {

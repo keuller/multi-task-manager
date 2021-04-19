@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useAtom } from 'jotai';
 import { authenticate } from '../api/user';
+import { viewAtom } from '../shared/views';
 
-export default function Login({ doRegister, doAuth }) {
+export default function Login() {
+    const [, setView] = useAtom(viewAtom);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -10,7 +13,7 @@ export default function Login({ doRegister, doAuth }) {
         ev.preventDefault();
         const ret = await authenticate(email, password);
         if (ret == '') {
-            doAuth();
+            setView('home');
         } else {
             setMessage(ret);
         }
@@ -33,7 +36,7 @@ export default function Login({ doRegister, doAuth }) {
 
     const registerClick = (ev) => {
         ev.preventDefault();
-        doRegister();
+        setView('register');
     }
 
     return (

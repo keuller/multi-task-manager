@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react';
-import { atom, useAtom } from 'jotai';
+import React from 'react';
+import { useAtom } from 'jotai';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
-import { getUser } from './util/persistence';
-
-const isLoggedIn = (getUser().id ? true : false);
-const viewAtom = atom((isLoggedIn ? 'home' : 'login'));
+import { viewAtom } from './shared/views';
 
 export default function App() {
-    const [view, setView] = useAtom(viewAtom);
+    const [view] = useAtom(viewAtom);
     
     const switchView = (selectedView) => {
         switch (selectedView) {
             case 'login': {
-                return (<Login doRegister={() => setView('register')} doAuth={() => setView('home')} />);
+                return (<Login />);
             }
             case 'register': {
                 return (<Register doLogin={() => setView('login')} />);
@@ -24,10 +21,6 @@ export default function App() {
             }
         }
     }
-
-    useEffect(() => {
-        return () => {}
-    }, [view])
 
     return (
         <div>
