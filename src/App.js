@@ -14,7 +14,7 @@ export default function App() {
                 return (<Login />);
             }
             case 'register': {
-                return (<Register doLogin={() => setView('login')} />);
+                return (<Register />);
             }
             default: {
                 return (<Home />);
