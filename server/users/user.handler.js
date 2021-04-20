@@ -14,14 +14,14 @@ export function registerUserRoutes(app) {
 /*
  * Authtentication user handler
 */
-async function auth(request, _reply) {
+async function auth(request) {
     return await userService.auth(request.body);
 }
 
-async function registerUser(request, _reply) {
+async function registerUser(request) {
     return await userService.register(request.body);
 }
 
-async function listUsers(_request, _reply) {
+async function listUsers(_request) {
     return await userService.getAll();
 }

@@ -8,6 +8,13 @@ test('Add a new task', () => {
         .catch(err => expect(err).toBeFalsy())
 });
 
+test('Update a valid task', () => {
+    const t1 = { id: 't123', projectId: 'p123', title: 'Task updated' }
+    return taskRepo.update(t1)
+        .then(res => expect(res).toStrictEqual({ status: 'OK' }))
+        .catch(err => expect(err).toBeFalsy())
+});
+
 test('Fetch all tasks by project', () => {
     return taskRepo.findtasks('p123')
         .then(res => expect(res.length).toEqual(1))
@@ -20,7 +27,7 @@ test('Finish a task', () => {
         .catch(err => expect(err).toBeFalsy())
 });
 
-test('Check task is finished', () => {
+test('Check the task has already been finished', () => {
     return taskRepo.isFinished('p123', 't123')
         .then(res => expect(res).toEqual(true))
         .catch(err => expect(err).toBeFalsy())
@@ -39,7 +46,7 @@ test('Remove a task by ID', () => {
 });
 
 test('Try to remove an invalid task', () => {
-    return taskRepo.finish('p123', 't000')
+    return taskRepo.remove('p123', 't000')
         .then(res => expect(res).toBeFalsy())
         .catch(err => expect(err).toStrictEqual({ status: 'NOT_FOUND' }))
 });

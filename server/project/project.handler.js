@@ -44,12 +44,13 @@ function getById(request) {
 }
 
 async function getByUser(request) {
-    let token = decode(request.headers['authorization']);
+    const token = request.context['token'];
     return await projectService.getProjectsByUser(token.id);
 }
 
 async function remove(request) {
-    return await projectService.remove(request.params['id']);
+    const token = request.context['token'];
+    return await projectService.remove(token.id, request.params['id']);
 }
 
 function addTask(request) {

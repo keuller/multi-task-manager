@@ -40,7 +40,7 @@ function checkTokenHook(request, reply, done) {
     }
 
     try {
-        decode(request.headers['authorization']);
+        request.context['token'] = decode(request.headers['authorization']);
         done();
     } catch (err) {
         reply.status(400).send({ status: 'FAIL', message: 'Invalid request token.' });

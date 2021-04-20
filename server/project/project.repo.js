@@ -23,9 +23,9 @@ export default {
         });
     },
 
-    remove(id) {
+    remove(userId, id) {
         return new Promise((resolve, reject) => {
-            let idx = projects.findIndex(item => item.id == id);
+            let idx = projects.findIndex(item => item.id == id && item.userId == userId);
             if (idx == -1) {
                 return reject({ status: 'NOT_FOUND' })
             }

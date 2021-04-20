@@ -31,8 +31,8 @@ export default class ProjectService {
         });
     }
 
-    remove(id) {
-        return this.repo.remove(id)
-            .then(res => ok('Project was removed.'));
+    remove(userId, id) {
+        return this.repo.remove(userId, id)
+            .then(_res => ok('Project was removed.'));
     }
 }

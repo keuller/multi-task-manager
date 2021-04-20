@@ -38,7 +38,7 @@ export default {
             let subtasks = tasks[projectId] || [];
             let idx = subtasks.findIndex(item => item.id == taskId);
             if (idx == -1) {
-                return reject({ status: 'NOT_FOUND' })
+                return reject({ status: 'NOT_FOUND' });
             }
             (subtasks[idx].finishedAt ? resolve(true) : resolve(false));
         });

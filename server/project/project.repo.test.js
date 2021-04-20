@@ -33,9 +33,14 @@ test('get project by User', () => {
         .catch(err => expect(err).toBeFalsy())
 });
 
-test('remove project by ID', () => {
-    return projectRepo.remove('p123')
+test('should remove project by ID with valid user', () => {
+    return projectRepo.remove('u123', 'p123')
         .then(res => expect(res).toStrictEqual({ status: 'OK' }))
         .catch(err => expect(err).toBeFalsy())
 });
 
+test("shouldn 't remove project by ID with invalid user", () => {
+    return projectRepo.remove('u12345', 'p123')
+        .then(res => expect(res).toBeFalsy())
+        .catch(err => expect(err).toStrictEqual({ status: 'NOT_FOUND' }))
+});
